@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Stone 아바타 문의</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#4f46e5',
+                            hover: '#4338ca'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .shadow-text-md {
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+        /* FAQ 버튼 스타일링 */
+        .faq-btn {
+            background: linear-gradient(to bottom right, #374151, #1f2937);
+            color: #e5e7eb;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: all 0.5s ease;
+        }
+        .faq-btn:hover {
+            background: linear-gradient(to bottom right, #4b5563, #374151);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+        .faq-btn:hover:before {
+            left: 100%;
+        }
+        .faq-btn:active {
+            transform: translateY(1px);
+        }
+        .speech-bubble-container.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 bg-black bg-gradient-to-b from-gray-900/80 to-black font-['Inter']">
+
+    <div class="w-full max-w-lg p-6 bg-gray-900/70 backdrop-blur-md rounded-xl border border-indigo-500/30 shadow-xl shadow-indigo-500/10">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-white shadow-text-md">AI Stone 아바타에게 문의하세요</h1>
+            <p class="text-gray-300 mt-2">궁금한 점을 아래에 입력하거나 버튼을 눌러주세요.</p>
+        </header>
+
+        <div class="video-container mb-6 rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50 hover:shadow-indigo-500/20 transition duration-300 hover:-translate-y-1">
+            <video id="avatarVideo" autoplay loop muted playsinline class="w-full h-auto">
+                <source id="videoSource" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div id="speechBubble" class="speech-bubble-container relative w-full max-w-[480px] mx-auto p-5 bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl border border-indigo-500/30 shadow-lg shadow-black/30 opacity-0 transition-opacity duration-500 min-h-[60px]">
+            <p id="answerText" class="text-sm"></p>
+        </div>
+
+        <div class="interaction-container w-full mt-6">
+            <div class="input-group flex mb-4 shadow-md">
+                <input type="text" id="questionInput" class="flex-grow p-3 bg-gray-800/90 border border-indigo-500/30 text-white rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="여기에 질문을 입력하세요...">
+                <button id="askButton" class="bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white p-3 rounded-r-md font-semibold transition duration-300 hover:-translate-y-0.5 active:translate-y-0.5 shadow-md">질문하기</button>
+            </div>
+
+            <div class="faq-buttons-container mb-4">
+                <h3 class="text-lg font-semibold mb-2 text-center text-gray-200">자주 묻는 질문 (FAQ)</h3>
+                <div id="faqButtons" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <!-- FAQ 버튼들이 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-8 pt-4 border-t border-indigo-500/20">
+            <p class="text-xs text-gray-400">
+                &copy; <span id="currentYear"></span> AI Stone. 모든 권리 보유.
+                <br>이메일 문의: <a href="mailto:aistonehub@gmail.com" class="text-indigo-400 hover:text-indigo-300 transition duration-300 relative hover:after:w-full after:absolute after:w-0 after:h-[1px] after:bg-indigo-400 after:bottom-[-2px] after:left-0 after:transition-all after:duration-300">aistonehub@gmail.com</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
